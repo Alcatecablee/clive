@@ -536,7 +536,8 @@ function PlatformCard({ platform }: { platform: PlatformSolution }) {
       <a
         href={platform.link.href}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
+        title={`Visit ${platform.title} in a new tab`}
         className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
       >
         <ExternalLink className="h-4 w-4" aria-hidden />
