@@ -469,7 +469,8 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
         <a
           href={item.link.href}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
+          title={`Open ${item.company} in a new tab`}
           className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
         >
           <ExternalLink className="h-4 w-4" aria-hidden />
