@@ -103,7 +103,7 @@
 
   body {
     font-family: "Inter", sans-serif;
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
   }
 
   h1,
@@ -111,5 +111,24 @@
   h3,
   h4 {
     font-family: "Space Grotesk", sans-serif;
+  }
+
+  button,
+  a[href],
+  input,
+  textarea,
+  select {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
