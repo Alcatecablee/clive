@@ -6,6 +6,15 @@ A production-ready full-stack React application template with integrated Express
 **Current State:** Fully configured and running on Replit with proper port binding and deployment settings.
 
 ## Recent Changes
+- **October 10, 2025:** Enhanced UX with working contact form and interactive features
+  - Integrated Resend email API for working contact form with full validation
+  - Created backend API endpoint at `/api/contact` with Zod validation
+  - Implemented form loading states, success/error messaging, and auto-reset
+  - Added WhatsApp integration button with direct messaging link (+27 67 049 4876)
+  - Created collapsible FAQ section with 6 common questions and answers
+  - Added smooth scroll behavior for seamless navigation between sections
+  - All features tested and verified working correctly
+
 - **October 10, 2025:** Comprehensive SEO implementation and favicon setup
   - Downloaded and converted clive-profile.jpg to multiple favicon formats (ico, 16x16, 32x32, 180x180, 192x192, 512x512)
   - Implemented comprehensive SEO meta tags (title, description, keywords, author, robots, canonical)
