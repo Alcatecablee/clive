@@ -5,7 +5,11 @@ import { Mail, Monitor, Phone, ExternalLink, Twitter } from "lucide-react";
 
 const navItems = [
   { href: "/#about", label: "About", title: "Go to About section" },
-  { href: "/#experience", label: "Experience", title: "Explore business experience" },
+  {
+    href: "/#experience",
+    label: "Experience",
+    title: "Explore business experience",
+  },
   { href: "/#contact", label: "Contact", title: "Reach the contact section" },
 ];
 
