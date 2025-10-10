@@ -8,7 +8,12 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 5000,
-    allowedHosts: [".replit.dev", ".replit.app"],
+    allowedHosts: true,
+    hmr: {
+      protocol: 'wss',
+      host: process.env.REPLIT_DOMAINS?.split(',')[0],
+      clientPort: 443,
+    },
     fs: {
       allow: ["./client", "./shared"],
       deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
