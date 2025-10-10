@@ -669,12 +669,14 @@ function HeroSection() {
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <a
             href="#contact"
+            title="Jump to the contact section"
             className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-10 text-sm font-semibold text-primary-foreground shadow-lg transition-transform duration-200 hover:-translate-y-0.5 hover:bg-primary/90"
           >
             Get In Touch
           </a>
           <a
             href="#experience"
+            title="View Clive's professional experience"
             className="inline-flex h-11 items-center justify-center rounded-full border border-input bg-background/70 px-10 text-sm font-semibold text-foreground transition-colors duration-200 hover:border-primary/50 hover:bg-primary/5"
           >
             View Experience
