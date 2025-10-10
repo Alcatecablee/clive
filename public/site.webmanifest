@@ -1,0 +1,21 @@
+{
+  "name": "Clive Makazhu - Entrepreneur & Technology Leader",
+  "short_name": "Clive Makazhu",
+  "description": "Founder & CEO of BurbGigz IT Services, SuperK53, and Taxfy — building innovative digital solutions for South African businesses and consumers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
