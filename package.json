@@ -11,7 +11,9 @@
     ]
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:vite\"",
+    "dev:api": "tsx server/dev-server.ts",
+    "dev:vite": "vite",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build",
     "build:server": "vite build --config vite.config.server.ts",
@@ -22,6 +24,7 @@
   },
   "dependencies": {
     "@vercel/node": "^5.3.26",
+    "concurrently": "^9.2.1",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "resend": "^6.1.2",
