@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Monitor, Phone, ExternalLink, Twitter } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const navItems = [
   { href: "/#about", label: "About", title: "Go to About section" },
@@ -51,13 +52,16 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
               </a>
             ))}
           </nav>
-          <a
-            href="/#contact"
-            title="Open the contact section"
-            className="hidden rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 md:inline-flex"
-          >
-            Let's Connect
-          </a>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <a
+              href="/#contact"
+              title="Open the contact section"
+              className="hidden rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 md:inline-flex"
+            >
+              Let's Connect
+            </a>
+          </div>
         </div>
       </header>
       <main className="flex-1">{children}</main>
