@@ -244,7 +244,8 @@ const platformSolutions: PlatformSolution[] = [
   {
     title: "SuperK53",
     badge: "Official Platform",
-    description: "South Africa's official K53 learner's license assessment platform.",
+    description:
+      "South Africa's official K53 learner's license assessment platform.",
     details:
       "Department of Transport certified digital examinations with comprehensive preparation, real-time scoring, and verified DLTC directory access.",
     bullets: [
@@ -261,7 +262,8 @@ const platformSolutions: PlatformSolution[] = [
   {
     title: "Taxfy",
     badge: "50,000+ Users",
-    description: "SARS-compliant tax calculator trusted by South Africans nationwide.",
+    description:
+      "SARS-compliant tax calculator trusted by South Africans nationwide.",
     details:
       "Instant IRP5 analysis and refund calculations with bank-level security, delivering optimised results in under 30 seconds.",
     bullets: [
@@ -281,38 +283,49 @@ const servicePackages: ServicePackage[] = [
   {
     title: "Remote IT Support",
     price: "From R150",
-    description: "Professional remote diagnostics and resolution for urgent issues.",
+    description:
+      "Professional remote diagnostics and resolution for urgent issues.",
     items: ["Remote Diagnostics", "Software Installation", "System Updates"],
   },
   {
     title: "Virus & Malware Removal",
     price: "From R200",
-    description: "Deep system scans and malware removal with secure antivirus setup.",
+    description:
+      "Deep system scans and malware removal with secure antivirus setup.",
     items: ["Deep System Scan", "Malware Removal", "Antivirus Setup"],
   },
   {
     title: "Network & Connectivity",
     price: "From R150",
-    description: "Reliable connectivity for homes and SMEs with expert configuration.",
+    description:
+      "Reliable connectivity for homes and SMEs with expert configuration.",
     items: ["Wi-Fi Configuration", "Network Troubleshooting", "Printer Setup"],
   },
   {
     title: "Windows Reload & Setup",
     price: "From R120",
-    description: "Clean OS installs, driver setup, and seamless data migration.",
+    description:
+      "Clean OS installs, driver setup, and seamless data migration.",
     items: ["Full OS Installation", "Driver Setup", "Data Migration"],
   },
   {
     title: "On-Site Hardware Service",
     price: "R400 callout",
-    description: "Hardware upgrades and replacements with 30-day workmanship warranty.",
+    description:
+      "Hardware upgrades and replacements with 30-day workmanship warranty.",
     items: ["SSD Installation", "RAM Upgrades", "Component Replacement"],
   },
   {
     title: "Professional Certifications",
     price: "Credentialed",
-    description: "Certified expertise recognised across enterprise IT environments.",
-    items: ["CompTIA A+", "CompTIA Network+", "Professional Helpdesk", "POS Systems Expert"],
+    description:
+      "Certified expertise recognised across enterprise IT environments.",
+    items: [
+      "CompTIA A+",
+      "CompTIA Network+",
+      "Professional Helpdesk",
+      "POS Systems Expert",
+    ],
   },
 ];
 
@@ -340,17 +353,20 @@ const testimonials: Testimonial[] = [
 const contactChannels: ContactChannel[] = [
   {
     title: "IT Support & Consulting",
-    description: "Remote sessions start immediately with enterprise-grade diagnostics.",
+    description:
+      "Remote sessions start immediately with enterprise-grade diagnostics.",
     icon: Headset,
   },
   {
     title: "Digital Platform Development",
-    description: "Design, build, and launch platforms tailored to South African users.",
+    description:
+      "Design, build, and launch platforms tailored to South African users.",
     icon: Layers,
   },
   {
     title: "Business Partnerships",
-    description: "Collaborate on growth strategies and scalable technology solutions.",
+    description:
+      "Collaborate on growth strategies and scalable technology solutions.",
     icon: LineChart,
   },
 ];
@@ -412,11 +428,7 @@ function HighlightBadge({ children }: { children: React.ReactNode }) {
   );
 }
 
-function PortfolioCard({
-  item,
-}: {
-  item: PortfolioItem;
-}) {
+function PortfolioCard({ item }: { item: PortfolioItem }) {
   return (
     <article className="group relative overflow-hidden rounded-2xl border border-border bg-card/80 p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl">
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -435,7 +447,9 @@ function PortfolioCard({
             <span>{item.timeframe}</span>
           </div>
           {item.location ? (
-            <p className="mt-2 text-sm text-muted-foreground">{item.location}</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {item.location}
+            </p>
           ) : null}
         </div>
       </div>
@@ -538,7 +552,9 @@ function ServiceCard({ service }: { service: ServicePackage }) {
           {service.title}
         </h3>
         <p className="mt-1 text-sm font-medium text-primary">{service.price}</p>
-        <p className="mt-3 text-sm text-muted-foreground">{service.description}</p>
+        <p className="mt-3 text-sm text-muted-foreground">
+          {service.description}
+        </p>
       </div>
       <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
         {service.items.map((item) => (
@@ -607,10 +623,7 @@ export default function Index() {
       <SkillsSection />
       <ServicesSection />
       <TestimonialsSection />
-      <ContactSection
-        status={contactStatus}
-        onSubmit={handleContactSubmit}
-      />
+      <ContactSection status={contactStatus} onSubmit={handleContactSubmit} />
     </div>
   );
 }
@@ -645,7 +658,9 @@ function HeroSection() {
             Entrepreneur &amp; Technology Leader
           </p>
           <p className="text-lg leading-relaxed text-muted-foreground sm:text-xl">
-            Founder &amp; CEO of BurbGigz IT Services, SuperK53, and Taxfy — building innovative digital solutions for South African businesses and consumers.
+            Founder &amp; CEO of BurbGigz IT Services, SuperK53, and Taxfy —
+            building innovative digital solutions for South African businesses
+            and consumers.
           </p>
         </div>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -669,7 +684,10 @@ function HeroSection() {
 
 function AboutSection() {
   return (
-    <SectionWrapper id="about" className="bg-gradient-to-b from-background to-background/60">
+    <SectionWrapper
+      id="about"
+      className="bg-gradient-to-b from-background to-background/60"
+    >
       <SectionHeading
         eyebrow="About"
         title="Building impactful technology for South Africa"
@@ -677,17 +695,33 @@ function AboutSection() {
       />
       <div className="mt-12 space-y-6 text-lg leading-relaxed text-muted-foreground">
         <p>
-          I am a technology entrepreneur and the founder of three successful South African digital businesses. My journey began with BurbGigz IT Services in 2010, providing professional IT support across Johannesburg, and has expanded to include innovative platforms serving thousands of South Africans.
+          I am a technology entrepreneur and the founder of three successful
+          South African digital businesses. My journey began with BurbGigz IT
+          Services in 2010, providing professional IT support across
+          Johannesburg, and has expanded to include innovative platforms serving
+          thousands of South Africans.
         </p>
         <p>
-          As Founder &amp; CEO of SuperK53, I've created South Africa's official learner's license assessment platform, helping citizens prepare for their driving tests with Department of Transport certified content. Through Taxfy, I've built a trusted SARS-compliant tax calculator that has assisted over 50,000 South Africans in maximising their tax refunds.
+          As Founder &amp; CEO of SuperK53, I've created South Africa's official
+          learner's license assessment platform, helping citizens prepare for
+          their driving tests with Department of Transport certified content.
+          Through Taxfy, I've built a trusted SARS-compliant tax calculator that
+          has assisted over 50,000 South Africans in maximising their tax
+          refunds.
         </p>
         <p>
-          My expertise spans from hands-on IT support and professional certifications to building scalable digital platforms that solve real problems for South African consumers and businesses. I combine technical knowledge with entrepreneurial vision to create solutions that make a meaningful impact.
+          My expertise spans from hands-on IT support and professional
+          certifications to building scalable digital platforms that solve real
+          problems for South African consumers and businesses. I combine
+          technical knowledge with entrepreneurial vision to create solutions
+          that make a meaningful impact.
         </p>
         <div className="flex flex-wrap items-center gap-3 text-base font-medium text-muted-foreground">
           <MapPin className="h-5 w-5 text-primary" aria-hidden />
-          <span>Lombardy East, Johannesburg • Building digital solutions for South Africa</span>
+          <span>
+            Lombardy East, Johannesburg • Building digital solutions for South
+            Africa
+          </span>
         </div>
       </div>
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -709,7 +743,9 @@ function AboutSection() {
                   {stat.label}
                 </p>
               </div>
-              <p className="text-sm text-muted-foreground">{stat.description}</p>
+              <p className="text-sm text-muted-foreground">
+                {stat.description}
+              </p>
             </div>
           );
         })}
@@ -771,10 +807,12 @@ function ServicesSection() {
             BurbGigz IT Services
           </p>
           <h3 className="font-display text-3xl font-semibold text-foreground">
-            Professional remote-first IT support with on-site services when needed
+            Professional remote-first IT support with on-site services when
+            needed
           </h3>
           <p className="text-base text-muted-foreground">
-            Remote sessions start immediately • Professional helpdesk experience • 30-day warranty on all repairs
+            Remote sessions start immediately • Professional helpdesk experience
+            • 30-day warranty on all repairs
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -843,11 +881,15 @@ function ContactSection({
             Share your project or support request
           </h3>
           <p className="mt-2 text-sm text-muted-foreground">
-            Have a question about IT support or digital platforms? I'd love to help you find the right solution.
+            Have a question about IT support or digital platforms? I'd love to
+            help you find the right solution.
           </p>
           <form className="mt-6 space-y-5" onSubmit={onSubmit}>
             <div className="grid gap-2">
-              <label htmlFor="name" className="text-sm font-medium text-foreground">
+              <label
+                htmlFor="name"
+                className="text-sm font-medium text-foreground"
+              >
                 Name
               </label>
               <input
@@ -860,7 +902,10 @@ function ContactSection({
               />
             </div>
             <div className="grid gap-2">
-              <label htmlFor="email" className="text-sm font-medium text-foreground">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-foreground"
+              >
                 Email
               </label>
               <input
@@ -873,7 +918,10 @@ function ContactSection({
               />
             </div>
             <div className="grid gap-2">
-              <label htmlFor="subject" className="text-sm font-medium text-foreground">
+              <label
+                htmlFor="subject"
+                className="text-sm font-medium text-foreground"
+              >
                 Subject
               </label>
               <input
@@ -886,7 +934,10 @@ function ContactSection({
               />
             </div>
             <div className="grid gap-2">
-              <label htmlFor="message" className="text-sm font-medium text-foreground">
+              <label
+                htmlFor="message"
+                className="text-sm font-medium text-foreground"
+              >
                 Message
               </label>
               <textarea
@@ -910,7 +961,9 @@ function ContactSection({
             role="status"
             aria-live="polite"
           >
-            {status === "success" ? "Thank you for reaching out! I'll respond shortly." : null}
+            {status === "success"
+              ? "Thank you for reaching out! I'll respond shortly."
+              : null}
           </div>
         </div>
       </div>

@@ -69,7 +69,9 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
               </div>
             </div>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Entrepreneur &amp; technology leader building innovative digital solutions for South African consumers and businesses from Johannesburg.
+              Entrepreneur &amp; technology leader building innovative digital
+              solutions for South African consumers and businesses from
+              Johannesburg.
             </p>
             <div className="flex flex-col gap-3 text-sm text-muted-foreground">
               <a
@@ -109,7 +111,9 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
           </div>
         </div>
         <div className="mx-auto mt-12 flex w-full max-w-6xl items-center justify-between px-6 text-xs text-muted-foreground">
-          <p>© {new Date().getFullYear()} Clive Makazhu. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Clive Makazhu. All rights reserved.
+          </p>
           <a
             href="https://www.macaly.com"
             target="_blank"

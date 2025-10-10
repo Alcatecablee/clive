@@ -6,7 +6,10 @@ const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+    console.error(
+      "404 Error: User attempted to access non-existent route:",
+      location.pathname,
+    );
   }, [location.pathname]);
 
   return (
@@ -19,7 +22,8 @@ const NotFound = () => {
           Page Not Found
         </h1>
         <p className="mt-4 text-base text-muted-foreground">
-          The page you're looking for doesn't exist yet. Continue exploring the portfolio or get in touch to learn more about Clive's work.
+          The page you're looking for doesn't exist yet. Continue exploring the
+          portfolio or get in touch to learn more about Clive's work.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
