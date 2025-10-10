@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, type ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   BadgeCheck,
@@ -360,7 +360,7 @@ function SectionWrapper({
   id,
   className,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   id?: string;
   className?: string;
 }) {
@@ -774,7 +774,7 @@ function ServicesSection() {
             Professional remote-first IT support with on-site services when needed
           </h3>
           <p className="text-base text-muted-foreground">
-            Remote sessions start immediately ��� Professional helpdesk experience • 30-day warranty on all repairs
+            Remote sessions start immediately • Professional helpdesk experience • 30-day warranty on all repairs
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
