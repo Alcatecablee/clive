@@ -840,7 +840,8 @@ function ServicesSection() {
           <a
             href="https://burbgigz.com"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
+            title="Visit BurbGigz IT Services"
             className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-transform duration-200 hover:-translate-y-0.5 hover:bg-primary/90"
           >
             <ExternalLink className="h-4 w-4" aria-hidden />
