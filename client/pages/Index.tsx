@@ -13,6 +13,7 @@ import {
   Network,
   ShieldCheck,
   Sparkles,
+  Twitter,
   Users,
 } from "lucide-react";
 
