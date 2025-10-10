@@ -112,7 +112,15 @@ pnpm test       # Run Vitest tests
 2. Add route in `client/App.tsx` before the catch-all `*` route
 
 ### Deployment Notes
+
+#### Replit Deployment
 - Autoscale deployment automatically handles scaling based on traffic
 - Server binds to `process.env.PORT` in production (Replit sets this)
 - All static SPA assets are served from `dist/spa/`
 - API routes handled by Express server at `/api/*`
+
+#### Vercel Deployment
+- Project is configured for Vercel deployment with serverless functions
+- See `VERCEL_DEPLOYMENT.md` for complete deployment guide
+- Custom domain `justc.live` configuration included
+- API routes handled by serverless function in `api/[...path].ts`
