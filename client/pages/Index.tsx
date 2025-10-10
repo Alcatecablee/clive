@@ -4,11 +4,14 @@ import {
   BadgeCheck,
   Building2,
   CalendarDays,
+  ChevronDown,
   ExternalLink,
   Headset,
   Layers,
   LineChart,
+  Loader2,
   MapPin,
+  MessageCircle,
   Monitor,
   Network,
   ShieldCheck,
@@ -75,6 +78,11 @@ type ContactChannel = {
   title: string;
   description: string;
   icon: LucideIcon;
+};
+
+type FAQItem = {
+  question: string;
+  answer: string;
 };
 
 const stats: StatCard[] = [
@@ -372,6 +380,39 @@ const contactChannels: ContactChannel[] = [
   },
 ];
 
+const faqItems: FAQItem[] = [
+  {
+    question: "What IT support services do you offer?",
+    answer:
+      "BurbGigz IT Services provides comprehensive remote and on-site IT support including virus removal, network setup, hardware upgrades (SSD/RAM), Windows installation, and professional diagnostics. All services come with competitive pricing and a 30-day workmanship warranty.",
+  },
+  {
+    question: "How does SuperK53 help with learner's license preparation?",
+    answer:
+      "SuperK53 is South Africa's official Department of Transport certified K53 assessment platform. It offers 64-question practice tests that mirror real exams, real-time scoring, performance analytics, and access to a verified DLTC testing centre directory.",
+  },
+  {
+    question: "Is Taxfy SARS compliant and secure?",
+    answer:
+      "Yes, Taxfy is fully SARS and POPIA compliant. We process all calculations locally in South Africa with bank-level security. Over 50,000 South Africans trust Taxfy for instant IRP5 analysis and refund calculations, delivered in under 30 seconds.",
+  },
+  {
+    question: "What are your IT support rates?",
+    answer:
+      "Remote IT support starts from R150, virus/malware removal from R200, network setup from R150, Windows reload from R120, and on-site hardware service has a R400 callout fee. All prices include professional diagnostics and expert consultation.",
+  },
+  {
+    question: "Do you offer remote IT support?",
+    answer:
+      "Yes! BurbGigz specializes in remote-first IT support. I can diagnose and resolve most issues remotely, saving you time and money. Remote sessions start immediately with real-time support and professional-grade diagnostics tools.",
+  },
+  {
+    question: "What certifications do you hold?",
+    answer:
+      "I hold CompTIA A+ and CompTIA Network+ certifications, along with professional helpdesk credentials and POS systems expertise. With 15+ years of hands-on experience, I bring enterprise-level expertise to every project.",
+  },
+];
+
 function SectionWrapper({
   children,
   id,
@@ -608,14 +649,46 @@ function ContactChannelCard({ channel }: { channel: ContactChannel }) {
 }
 
 export default function Index() {
-  const [contactStatus, setContactStatus] = useState<"idle" | "success">(
-    "idle",
-  );
+  const [contactStatus, setContactStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setContactStatus("success");
-    event.currentTarget.reset();
+    setContactStatus("loading");
+    setErrorMessage("");
+
+    const formData = new FormData(event.currentTarget);
+    const data = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      message: formData.get("message") as string,
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setContactStatus("success");
+        event.currentTarget.reset();
+        setTimeout(() => setContactStatus("idle"), 5000);
+      } else {
+        setContactStatus("error");
+        setErrorMessage(result.error || "Failed to send message");
+      }
+    } catch (error) {
+      setContactStatus("error");
+      setErrorMessage("Network error. Please try again.");
+    }
   };
 
   return (
@@ -626,7 +699,12 @@ export default function Index() {
       <SkillsSection />
       <ServicesSection />
       <TestimonialsSection />
-      <ContactSection status={contactStatus} onSubmit={handleContactSubmit} />
+      <FAQSection />
+      <ContactSection
+        status={contactStatus}
+        errorMessage={errorMessage}
+        onSubmit={handleContactSubmit}
+      />
     </div>
   );
 }
@@ -875,11 +953,65 @@ function TestimonialsSection() {
   );
 }
 
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <SectionWrapper className="bg-gradient-to-b from-background to-background/60">
+      <SectionHeading
+        eyebrow="FAQ"
+        title="Frequently Asked Questions"
+        description="Quick answers to common questions about my services and platforms."
+      />
+      <div className="mx-auto mt-12 max-w-3xl space-y-4">
+        {faqItems.map((item, index) => (
+          <div
+            key={index}
+            className="overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition-all hover:border-primary/30"
+          >
+            <button
+              onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              className="flex w-full items-center justify-between p-6 text-left transition-colors hover:bg-accent/5"
+            >
+              <h3 className="pr-8 font-display text-lg font-semibold text-foreground">
+                {item.question}
+              </h3>
+              <ChevronDown
+                className={cn(
+                  "h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200",
+                  openIndex === index && "rotate-180",
+                )}
+                aria-hidden
+              />
+            </button>
+            <div
+              className={cn(
+                "grid transition-all duration-200 ease-in-out",
+                openIndex === index
+                  ? "grid-rows-[1fr] opacity-100"
+                  : "grid-rows-[0fr] opacity-0",
+              )}
+            >
+              <div className="overflow-hidden">
+                <p className="px-6 pb-6 text-base leading-relaxed text-muted-foreground">
+                  {item.answer}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </SectionWrapper>
+  );
+}
+
 function ContactSection({
   status,
+  errorMessage,
   onSubmit,
 }: {
-  status: "idle" | "success";
+  status: "idle" | "loading" | "success" | "error";
+  errorMessage: string;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }) {
   return (
@@ -894,6 +1026,25 @@ function ContactSection({
           {contactChannels.map((channel) => (
             <ContactChannelCard key={channel.title} channel={channel} />
           ))}
+          <a
+            href="https://wa.me/27670494876?text=Hi%20Clive,%20I%20need%20help%20with"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col gap-3 rounded-2xl border border-border bg-gradient-to-br from-green-500/10 to-green-600/5 p-6 text-left shadow-sm transition-all hover:scale-[1.02] hover:border-green-500/50"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 text-green-600">
+              <MessageCircle className="h-6 w-6" aria-hidden />
+            </div>
+            <h3 className="font-display text-lg font-semibold text-foreground">
+              WhatsApp Support
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Instant messaging for urgent IT support and quick consultations
+            </p>
+            <span className="text-sm font-medium text-green-600">
+              +27 67 049 4876
+            </span>
+          </a>
         </div>
         <div className="rounded-2xl border border-border bg-card/80 p-8 shadow-lg">
           <h3 className="font-display text-2xl font-semibold text-foreground">
@@ -970,20 +1121,37 @@ function ContactSection({
             </div>
             <button
               type="submit"
-              className="inline-flex h-11 w-full items-center justify-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-md transition hover:-translate-y-0.5 hover:bg-primary/90"
+              disabled={status === "loading"}
+              className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-md transition hover:-translate-y-0.5 hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
             >
-              Send Message
+              {status === "loading" ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+                  Sending...
+                </>
+              ) : (
+                "Send Message"
+              )}
             </button>
           </form>
-          <div
-            className="mt-4 text-sm text-primary"
-            role="status"
-            aria-live="polite"
-          >
-            {status === "success"
-              ? "Thank you for reaching out! I'll respond shortly."
-              : null}
-          </div>
+          {status === "success" && (
+            <div
+              className="mt-4 rounded-lg bg-green-500/10 p-3 text-sm text-green-600"
+              role="status"
+              aria-live="polite"
+            >
+              ✓ Thank you for reaching out! I'll respond shortly.
+            </div>
+          )}
+          {status === "error" && (
+            <div
+              className="mt-4 rounded-lg bg-red-500/10 p-3 text-sm text-red-600"
+              role="alert"
+              aria-live="assertive"
+            >
+              ✗ {errorMessage || "Failed to send message. Please try again."}
+            </div>
+          )}
         </div>
       </div>
     </SectionWrapper>
