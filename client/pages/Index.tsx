@@ -645,7 +645,7 @@ function HeroSection() {
       <div className="relative mx-auto flex min-h-[640px] w-full max-w-6xl flex-col items-center px-6 pb-24 pt-36 text-center">
         <div className="relative h-52 w-52 overflow-hidden rounded-full border-4 border-primary/20 bg-background shadow-[0_25px_60px_rgba(15,23,42,0.18)]">
           <img
-            src="https://macaly-fuagtp0bk4zo8xer5umsdn5d.macaly-app.com/clive-profile.jpg"
+            src="/clive-profile.jpg"
             alt="Clive Just_Clive Makazhu"
             className="h-full w-full object-cover"
           />
