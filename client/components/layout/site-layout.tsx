@@ -107,12 +107,12 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
                 +27 67 049 4876
               </a>
               <a
-                href="mailto:info@burbgigz.com"
+                href="mailto:hello@justc.live"
                 title="Email Clive Makazhu"
                 className="inline-flex items-center gap-2 transition hover:text-primary"
               >
                 <Mail className="h-4 w-4" aria-hidden />
-                info@burbgigz.com
+                hello@justc.live
               </a>
               <a
                 href="https://x.com/just_clive_sa"

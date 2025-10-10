@@ -15,11 +15,11 @@ router.post("/", async (req: Request, res: Response) => {
     const validatedData = contactSchema.parse(req.body);
     const { name, email, message } = validatedData;
 
-    const { client: resend, fromEmail } = await getUncachableResendClient();
+    const { client: resend } = await getUncachableResendClient();
 
     const { data, error } = await resend.emails.send({
-      from: fromEmail || "Portfolio Contact Form <onboarding@resend.dev>",
-      to: ["clivemakazhu@gmail.com"],
+      from: "Portfolio Contact <contact@justc.live>",
+      to: ["hello@justc.live"],
       replyTo: email,
       subject: `New Contact Form Submission from ${name}`,
       html: `
