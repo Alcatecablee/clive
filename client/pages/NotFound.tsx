@@ -34,7 +34,8 @@ const NotFound = () => {
             Back to Home
           </Link>
           <a
-            href="#contact"
+            href="/#contact"
+            title="Open the contact section"
             className="inline-flex items-center gap-2 rounded-full border border-input px-6 py-3 text-sm font-semibold text-foreground transition hover:border-primary/40 hover:bg-primary/5"
           >
             Connect with Clive
