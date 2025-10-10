@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import SiteLayout from "@/components/layout/site-layout";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,22 @@ const App = () => (
               element={
                 <SiteLayout>
                   <Index />
+                </SiteLayout>
+              }
+            />
+            <Route
+              path="/blog"
+              element={
+                <SiteLayout>
+                  <Blog />
+                </SiteLayout>
+              }
+            />
+            <Route
+              path="/blog/:id"
+              element={
+                <SiteLayout>
+                  <BlogPost />
                 </SiteLayout>
               }
             />
