@@ -1027,12 +1027,7 @@ function ContactSection({
           {contactChannels.map((channel) => (
             <ContactChannelCard key={channel.title} channel={channel} />
           ))}
-          <a
-            href="https://wa.me/27670494876?text=Hi%20Clive,%20I%20need%20help%20with"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-col gap-3 rounded-2xl border border-border bg-gradient-to-br from-green-500/10 to-green-600/5 p-6 text-left shadow-sm transition-all hover:scale-[1.02] hover:border-green-500/50"
-          >
+          <div className="flex flex-col gap-3 rounded-2xl border border-border bg-gradient-to-br from-green-500/10 to-green-600/5 p-6 shadow-sm">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 text-green-600">
               <MessageCircle className="h-6 w-6" aria-hidden />
             </div>
@@ -1045,7 +1040,15 @@ function ContactSection({
             <span className="text-sm font-medium text-green-600">
               +27 67 049 4876
             </span>
-          </a>
+            <a
+              href="https://wa.me/27670494876?text=Hi%20Clive,%20I%20need%20help%20with"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center justify-center rounded-lg bg-green-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            >
+              Message on WhatsApp
+            </a>
+          </div>
         </div>
         <div className="rounded-2xl border border-border bg-card/80 p-8 shadow-lg">
           <h3 className="font-display text-2xl font-semibold text-foreground">
