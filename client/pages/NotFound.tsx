@@ -28,6 +28,7 @@ const NotFound = () => {
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
             to="/"
+            title="Return to the homepage"
             className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md transition hover:-translate-y-0.5 hover:bg-primary/90"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden />
