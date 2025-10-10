@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Monitor, Phone, ExternalLink, Twitter } from "lucide-react";
 

@@ -8,9 +8,12 @@ A production-ready full-stack React application template with integrated Express
 ## Recent Changes
 - **October 10, 2025:** Initial Replit setup completed
   - Configured Vite dev server to use port 5000 (required for Replit)
+  - Added `allowedHosts` configuration for Replit proxy domains
   - Added Node types to TypeScript configuration
   - Set up development workflow with `pnpm dev`
   - Configured autoscale deployment with build and production commands
+  - Removed Netlify-specific files (netlify.toml, netlify/ directory)
+  - Fixed .gitignore to properly exclude .env files
 
 ## Project Architecture
 
@@ -88,6 +91,7 @@ pnpm test       # Run Vitest tests
 ### Vite Configuration
 - **Port 5000 is required** for Replit frontend workflow
 - **Host `::`** preserves IPv4/IPv6 binding compatible with Replit
+- **allowedHosts** - Must include `[".replit.dev", ".replit.app"]` to allow Replit's proxy domains
 - **No HMR override** - Vite auto-negotiates WebSocket correctly with Replit's proxy
 
 ### TypeScript Configuration
