@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { Mail, Monitor, Phone, ExternalLink, Twitter } from "lucide-react";
 
 const navItems = [
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#about", label: "About", title: "Go to About section" },
+  { href: "/#experience", label: "Experience", title: "Explore business experience" },
+  { href: "/#contact", label: "Contact", title: "Reach the contact section" },
 ];
 
 const footerLinks = [
@@ -40,6 +40,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
               <a
                 key={item.href}
                 href={item.href}
+                title={item.title}
                 className="transition-colors hover:text-foreground"
               >
                 {item.label}
@@ -47,7 +48,8 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <a
-            href="#contact"
+            href="/#contact"
+            title="Open the contact section"
             className="hidden rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 md:inline-flex"
           >
             Let's Connect
