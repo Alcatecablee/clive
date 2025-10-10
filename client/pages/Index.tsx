@@ -678,6 +678,19 @@ function HeroSection() {
             View Experience
           </a>
         </div>
+        <div className="mt-6 flex items-center gap-3 text-sm text-muted-foreground">
+          <Twitter className="h-5 w-5 text-primary" aria-hidden />
+          <a
+            href="https://x.com/just_clive_sa"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Follow Clive Makazhu on X"
+            className="font-medium text-muted-foreground transition-colors hover:text-primary"
+            aria-label="Follow @just_clive_sa on X"
+          >
+            @just_clive_sa
+          </a>
+        </div>
       </div>
     </section>
   );
