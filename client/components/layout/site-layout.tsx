@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Mail, Monitor, Phone, ExternalLink } from "lucide-react";
+import { Mail, Monitor, Phone, ExternalLink, Twitter } from "lucide-react";
 
 const navItems = [
   { href: "#about", label: "About" },
@@ -32,7 +32,10 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
               </p>
             </div>
           </Link>
-          <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex">
+          <nav
+            className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex"
+            aria-label="Primary"
+          >
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -77,18 +80,32 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
               <a
                 href="https://wa.me/27670494876"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
+                title="Chat with Clive on WhatsApp"
                 className="inline-flex items-center gap-2 transition hover:text-primary"
+                aria-label="Chat with Clive on WhatsApp"
               >
                 <Phone className="h-4 w-4" aria-hidden />
                 +27 67 049 4876
               </a>
               <a
                 href="mailto:info@burbgigz.com"
+                title="Email Clive Makazhu"
                 className="inline-flex items-center gap-2 transition hover:text-primary"
               >
                 <Mail className="h-4 w-4" aria-hidden />
                 info@burbgigz.com
+              </a>
+              <a
+                href="https://x.com/just_clive_sa"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Follow Clive on X"
+                className="inline-flex items-center gap-2 transition hover:text-primary"
+                aria-label="Follow Clive on X"
+              >
+                <Twitter className="h-4 w-4" aria-hidden />
+                @just_clive_sa
               </a>
             </div>
           </div>
@@ -100,7 +117,8 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
                   key={link.href}
                   href={link.href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
+                  title={`Visit ${link.label}`}
                   className="inline-flex items-center gap-2 transition hover:text-primary"
                 >
                   <ExternalLink className="h-4 w-4" aria-hidden />
@@ -117,7 +135,8 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
           <a
             href="https://www.macaly.com"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
+            title="Discover Macaly"
             className="rounded-full border border-border bg-background px-4 py-2 transition hover:border-primary/40 hover:text-primary"
           >
             Built with Macaly
