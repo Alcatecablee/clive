@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Mail, Monitor, Phone, ExternalLink, Twitter } from "lucide-react";
+import { Mail, Phone, ExternalLink, Twitter } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileNav } from "@/components/mobile-nav";
 
@@ -32,9 +32,11 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-50 border-b border-transparent bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
           <Link to="/" className="flex items-center gap-3 text-left">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
-              <Monitor className="h-5 w-5" aria-hidden />
-            </span>
+            <img 
+              src="/favicon-32x32.png" 
+              alt="Just Clive Logo" 
+              className="h-10 w-10 rounded-full shadow-md"
+            />
             <div>
               <p className="font-display text-lg font-semibold tracking-tight">
                 Just Clive
@@ -77,9 +79,11 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 sm:gap-12 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-xl space-y-4">
             <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
-                <Monitor className="h-5 w-5" aria-hidden />
-              </span>
+              <img 
+                src="/favicon-32x32.png" 
+                alt="Just Clive Logo" 
+                className="h-10 w-10 rounded-full shadow-md"
+              />
               <div>
                 <p className="font-display text-lg font-semibold tracking-tight">
                   Clive "Just_Clive" Makazhu
