@@ -646,7 +646,7 @@ function HeroSection() {
         <div className="relative h-52 w-52 overflow-hidden rounded-full border-4 border-primary/20 bg-background shadow-[0_25px_60px_rgba(15,23,42,0.18)]">
           <img
             src="https://macaly-fuagtp0bk4zo8xer5umsdn5d.macaly-app.com/clive-profile.jpg"
-            alt="Clive Makazhu"
+            alt="Clive Just_Clive Makazhu"
             className="h-full w-full object-cover"
           />
           <span className="absolute -bottom-4 right-6 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl">
@@ -655,7 +655,7 @@ function HeroSection() {
         </div>
         <div className="mt-10 max-w-4xl space-y-6">
           <h1 className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Clive Makazhu
+            Clive "Just_Clive" Makazhu
           </h1>
           <p className="text-xl font-medium text-muted-foreground sm:text-2xl">
             Entrepreneur &amp; Technology Leader

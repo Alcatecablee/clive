@@ -29,7 +29,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
             </span>
             <div>
               <p className="font-display text-lg font-semibold tracking-tight">
-                Clive Makazhu
+                Just Clive
               </p>
               <p className="text-xs text-muted-foreground">
                 Entrepreneur &amp; Technology Leader
@@ -70,7 +70,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
               </span>
               <div>
                 <p className="font-display text-lg font-semibold tracking-tight">
-                  Clive Makazhu
+                  Clive "Just_Clive" Makazhu
                 </p>
                 <p className="text-xs text-muted-foreground">
                   Founder of SuperK53, Taxfy &amp; BurbGigz IT Services
@@ -136,7 +136,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
         </div>
         <div className="mx-auto mt-12 flex w-full max-w-6xl items-center justify-between px-6 text-xs text-muted-foreground">
           <p>
-            © {new Date().getFullYear()} Clive Makazhu. All rights reserved.
+            © {new Date().getFullYear()} Clive "Just_Clive" Makazhu. All rights reserved.
           </p>
           <a
             href="https://www.macaly.com"
