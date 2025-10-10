@@ -23,6 +23,12 @@ const footerLinks = [
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
       <header className="sticky top-0 z-50 border-b border-transparent bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
           <Link to="/" className="flex items-center gap-3 text-left">
@@ -66,9 +72,9 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
           </div>
         </div>
       </header>
-      <main className="flex-1">{children}</main>
-      <footer className="border-t border-border bg-background/80 py-16">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 lg:flex-row lg:items-start lg:justify-between">
+      <main id="main-content" className="flex-1" tabIndex={-1}>{children}</main>
+      <footer className="border-t border-border bg-background/80 py-12 sm:py-16">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 sm:gap-12 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-xl space-y-4">
             <div className="flex items-center gap-3">
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
@@ -94,7 +100,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Chat with Clive on WhatsApp"
-                className="inline-flex items-center gap-2 transition hover:text-primary"
+                className="inline-flex min-h-[44px] items-center gap-2 py-1 transition-colors hover:text-primary"
                 aria-label="Chat with Clive on WhatsApp"
               >
                 <Phone className="h-4 w-4" aria-hidden />

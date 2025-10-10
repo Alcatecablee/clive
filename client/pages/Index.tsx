@@ -472,7 +472,7 @@ function HighlightBadge({ children }: { children: React.ReactNode }) {
 
 function PortfolioCard({ item }: { item: PortfolioItem }) {
   return (
-    <article className="group relative overflow-hidden rounded-2xl border border-border bg-card/80 p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl">
+    <article className="group relative overflow-hidden rounded-2xl border border-border bg-card/80 p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-primary/50 hover:shadow-2xl sm:p-8" tabIndex={0}>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           {item.badge ? <HighlightBadge>{item.badge}</HighlightBadge> : null}
@@ -525,7 +525,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
 function SkillCard({ category }: { category: SkillCategory }) {
   const Icon = category.icon;
   return (
-    <div className="flex h-full flex-col gap-6 rounded-2xl border border-border bg-card/70 p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+    <div className="flex h-full flex-col gap-6 rounded-2xl border border-border bg-card/70 p-5 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-lg sm:p-6" tabIndex={0}>
       <div className="flex items-center gap-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
           <Icon className="h-6 w-6" aria-hidden />
@@ -551,7 +551,7 @@ function SkillCard({ category }: { category: SkillCategory }) {
 
 function PlatformCard({ platform }: { platform: PlatformSolution }) {
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-border bg-card/80 p-8 shadow-md transition-transform duration-300 hover:-translate-y-1">
+    <div className="flex h-full flex-col rounded-2xl border border-border bg-card/80 p-6 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl sm:p-8" tabIndex={0}>
       <div className="flex flex-wrap items-center gap-3">
         <HighlightBadge>{platform.badge}</HighlightBadge>
         <h3 className="font-display text-2xl font-semibold text-foreground">
@@ -590,7 +590,7 @@ function PlatformCard({ platform }: { platform: PlatformSolution }) {
 
 function ServiceCard({ service }: { service: ServicePackage }) {
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-border bg-card/70 p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary/40">
+    <div className="flex h-full flex-col rounded-2xl border border-border bg-card/70 p-5 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-primary/40 hover:shadow-lg sm:p-6" tabIndex={0}>
       <div>
         <h3 className="font-display text-xl font-semibold text-foreground">
           {service.title}
@@ -748,14 +748,14 @@ function HeroSection() {
           <a
             href="#contact"
             title="Jump to the contact section"
-            className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-10 text-sm font-semibold text-primary-foreground shadow-lg transition-transform duration-200 hover:-translate-y-0.5 hover:bg-primary/90"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:bg-primary/90 active:translate-y-0 sm:px-10"
           >
             Get In Touch
           </a>
           <a
             href="#experience"
             title="View Clive's professional experience"
-            className="inline-flex h-11 items-center justify-center rounded-full border border-input bg-background/70 px-10 text-sm font-semibold text-foreground transition-colors duration-200 hover:border-primary/50 hover:bg-primary/5"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-full border-2 border-input bg-background/70 px-8 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-primary/5 hover:shadow-lg active:translate-y-0 sm:px-10"
           >
             View Experience
           </a>
@@ -971,7 +971,8 @@ function FAQSection() {
           >
             <button
               onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              className="flex w-full items-center justify-between p-6 text-left transition-colors hover:bg-accent/5"
+              className="flex w-full items-center justify-between p-5 text-left transition-all hover:bg-accent/10 focus-visible:bg-accent/10 sm:p-6"
+              aria-expanded={openIndex === index}
             >
               <h3 className="pr-8 font-display text-lg font-semibold text-foreground">
                 {item.question}
@@ -1122,7 +1123,7 @@ function ContactSection({
             <button
               type="submit"
               disabled={status === "loading"}
-              className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-md transition hover:-translate-y-0.5 hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+              className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:bg-primary/90 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
             >
               {status === "loading" ? (
                 <>
