@@ -55,4 +55,28 @@
       <image:caption>Professional helpdesk services and remote IT support for South African businesses</image:caption>
     </image:image>
   </url>
+  
+  <url>
+    <loc>https://justc.live/blog/starting-tech-business-south-africa-2025</loc>
+    <lastmod>2025-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://justc.live/attached_assets/stock_images/entrepreneur_startup_9e073f87.jpg</image:loc>
+      <image:title>Starting a Tech Business in South Africa: A Complete Guide for Aspiring Entrepreneurs in 2025</image:title>
+      <image:caption>Complete guide to launching a successful tech startup in South Africa with funding, registration, and scaling strategies</image:caption>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://justc.live/blog/digital-transformation-south-african-smes-2025</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://justc.live/attached_assets/stock_images/digital_transformati_093c8edd.jpg</image:loc>
+      <image:title>Digital Transformation for South African SMEs: Why Your Business Needs to Go Digital in 2025</image:title>
+      <image:caption>Comprehensive guide to digital transformation for South African small businesses with implementation strategies and ROI</image:caption>
+    </image:image>
+  </url>
 </urlset>
