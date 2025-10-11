@@ -1,0 +1,91 @@
+13:38:49.607 Running build in Washington, D.C., USA (East) – iad1
+13:38:49.607 Build machine configuration: 2 cores, 8 GB
+13:38:49.624 Cloning github.com/Alcatecablee/swipe (Branch: main, Commit: 2316728)
+13:38:49.989 Cloning completed: 365.000ms
+13:38:50.073 Found .vercelignore
+13:38:50.075 Removed 0 ignored files defined in .vercelignore
+13:38:50.705 Restored build cache from previous deployment (7QTE9m6Yeyc2H9EMLLKmh5tei6kR)
+13:38:51.299 Running "vercel build"
+13:38:51.670 Vercel CLI 48.2.9
+13:38:52.348 Installing dependencies...
+13:38:53.727 
+13:38:53.728 up to date in 1s
+13:38:53.728 
+13:38:53.729 72 packages are looking for funding
+13:38:53.729   run `npm fund` for details
+13:38:53.857 
+13:38:53.857 > workr@1.0.0 build
+13:38:53.857 > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+13:38:53.858 
+13:38:54.144 vite v5.4.20 building for production...
+13:38:54.198 transforming...
+13:38:54.556 Browserslist: browsers data (caniuse-lite) is 12 months old. Please run:
+13:38:54.556   npx update-browserslist-db@latest
+13:38:54.557   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+13:38:55.761 
+13:38:55.761 A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+13:38:59.351 ✓ 2127 modules transformed.
+13:38:59.767 rendering chunks...
+13:38:59.786 computing gzip size...
+13:38:59.806 ../dist/public/index.html                   1.61 kB │ gzip:   0.70 kB
+13:38:59.806 ../dist/public/assets/index-B4ZYSmkL.css   91.40 kB │ gzip:  14.64 kB
+13:38:59.806 ../dist/public/assets/index-BAWLUwoH.js   636.85 kB │ gzip: 183.00 kB
+13:38:59.806 
+13:38:59.807 (!) Some chunks are larger than 500 kB after minification. Consider:
+13:38:59.807 - Using dynamic import() to code-split the application
+13:38:59.807 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+13:38:59.807 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+13:38:59.807 ✓ built in 5.64s
+13:38:59.875 
+13:38:59.876   dist/index.js  137.0kb
+13:38:59.876 
+13:38:59.876 ⚡ Done in 18ms
+13:39:00.208 Using TypeScript 5.6.3 (local user-provided)
+13:39:05.172 Using TypeScript 5.6.3 (local user-provided)
+13:39:08.559 server/routes.ts(263,53): error TS2345: Argument of type 'EnrichedJob' is not assignable to parameter of type '{ title: string; company: string; salary: string; location: string; sector: string | null; description: string; skills: string[]; nqfLevel: number | null; workType: string | null; applicationUrl: string | null; ... 4 more ...; isActive: boolean; }'.
+13:39:08.559   Types of property 'applicationUrl' are incompatible.
+13:39:08.559     Type 'string | undefined' is not assignable to type 'string | null'.
+13:39:08.559       Type 'undefined' is not assignable to type 'string | null'.
+13:39:08.559 server/routes.ts(272,57): error TS2345: Argument of type 'EnrichedJob' is not assignable to parameter of type '{ title: string; company: string; salary: string; location: string; sector: string | null; description: string; skills: string[]; nqfLevel: number | null; workType: string | null; applicationUrl: string | null; ... 4 more ...; isActive: boolean; }'.
+13:39:08.559   Types of property 'applicationUrl' are incompatible.
+13:39:08.560     Type 'string | undefined' is not assignable to type 'string | null'.
+13:39:08.560       Type 'undefined' is not assignable to type 'string | null'.
+13:39:08.560 server/routes.ts(273,49): error TS2345: Argument of type 'EnrichedJob' is not assignable to parameter of type '{ title: string; company: string; salary: string; location: string; sector: string | null; description: string; skills: string[]; nqfLevel: number | null; workType: string | null; applicationUrl: string | null; ... 4 more ...; isActive: boolean; }'.
+13:39:08.560   Types of property 'applicationUrl' are incompatible.
+13:39:08.560     Type 'string | undefined' is not assignable to type 'string | null'.
+13:39:08.560       Type 'undefined' is not assignable to type 'string | null'.
+13:39:08.561 server/routes.ts(280,9): error TS2322: Type 'EnrichedJob' is not assignable to type '{ title: string; company: string; salary: string; location: string; sector: string | null; description: string; skills: string[]; nqfLevel: number | null; workType: string | null; applicationUrl: string | null; ... 4 more ...; isActive: boolean; }'.
+13:39:08.561   Types of property 'applicationUrl' are incompatible.
+13:39:08.562     Type 'string | undefined' is not assignable to type 'string | null'.
+13:39:08.562       Type 'undefined' is not assignable to type 'string | null'.
+13:39:08.562 server/routes.ts(349,39): error TS2304: Cannot find name 'Job'.
+13:39:08.562 
+13:39:09.141 server/job-importer.ts(98,29): error TS2769: No overload matches this call.
+13:39:09.142   Overload 1 of 2, '(value: { title: string | SQL<unknown> | Placeholder<string, any>; company: string | SQL<unknown> | Placeholder<string, any>; salary: string | SQL<unknown> | Placeholder<...>; ... 11 more ...; isActive?: boolean | ... 2 more ... | undefined; }): PgInsertBase<...>', gave the following error.
+13:39:09.143     Type 'string | undefined' is not assignable to type 'string | SQL<unknown> | Placeholder<string, any>'.
+13:39:09.143       Type 'undefined' is not assignable to type 'string | SQL<unknown> | Placeholder<string, any>'.
+13:39:09.144   Overload 2 of 2, '(values: { title: string | SQL<unknown> | Placeholder<string, any>; company: string | SQL<unknown> | Placeholder<string, any>; salary: string | SQL<unknown> | Placeholder<...>; ... 11 more ...; isActive?: boolean | ... 2 more ... | undefined; }[]): PgInsertBase<...>', gave the following error.
+13:39:09.144     Object literal may only specify known properties, and 'id' does not exist in type '{ title: string | SQL<unknown> | Placeholder<string, any>; company: string | SQL<unknown> | Placeholder<string, any>; salary: string | SQL<unknown> | Placeholder<...>; ... 11 more ...; isActive?: boolean | ... 2 more ... | undefined; }[]'.
+13:39:09.144 
+13:39:09.238 server/job-enrichment-service.ts(9,11): error TS2430: Interface 'EnrichedJob' incorrectly extends interface '{ title: string; company: string; salary: string; location: string; sector: string | null; description: string; skills: string[]; nqfLevel: number | null; workType: string | null; applicationUrl: string | null; ... 4 more ...; isActive: boolean; }'.
+13:39:09.239   Types of property 'applicationUrl' are incompatible.
+13:39:09.239     Type 'string | undefined' is not assignable to type 'string | null'.
+13:39:09.239       Type 'undefined' is not assignable to type 'string | null'.
+13:39:09.239 server/job-enrichment-service.ts(36,3): error TS2322: Type '{ title: string; company: string; salary: string; location: string; sector: string | null; description: string; skills: string[]; nqfLevel: number | null; workType: string | null; applicationUrl: string | null; ... 4 more ...; isActive: boolean; }' is not assignable to type 'EnrichedJob'.
+13:39:09.239   Types of property 'applicationEmail' are incompatible.
+13:39:09.240     Type 'string | null' is not assignable to type 'string | undefined'.
+13:39:09.240       Type 'null' is not assignable to type 'string | undefined'.
+13:39:09.240 
+13:39:09.385 server/application-tracker.ts(33,31): error TS2339: Property 'createdAt' does not exist on type 'PgTableWithColumns<{ name: "applications"; schema: undefined; columns: { id: PgColumn<{ name: "id"; tableName: "applications"; dataType: "string"; columnType: "PgVarchar"; data: string; driverParam: string; notNull: true; ... 7 more ...; generated: undefined; }, {}, { ...; }>; ... 9 more ...; appliedAt: PgColumn<......'.
+13:39:09.385 server/application-tracker.ts(34,31): error TS2339: Property 'updatedAt' does not exist on type 'PgTableWithColumns<{ name: "applications"; schema: undefined; columns: { id: PgColumn<{ name: "id"; tableName: "applications"; dataType: "string"; columnType: "PgVarchar"; data: string; driverParam: string; notNull: true; ... 7 more ...; generated: undefined; }, {}, { ...; }>; ... 9 more ...; appliedAt: PgColumn<......'.
+13:39:09.386 server/application-tracker.ts(38,32): error TS2339: Property 'createdAt' does not exist on type 'PgTableWithColumns<{ name: "applications"; schema: undefined; columns: { id: PgColumn<{ name: "id"; tableName: "applications"; dataType: "string"; columnType: "PgVarchar"; data: string; driverParam: string; notNull: true; ... 7 more ...; generated: undefined; }, {}, { ...; }>; ... 9 more ...; appliedAt: PgColumn<......'.
+13:39:09.387 server/application-tracker.ts(76,31): error TS2339: Property 'createdAt' does not exist on type 'PgTableWithColumns<{ name: "applications"; schema: undefined; columns: { id: PgColumn<{ name: "id"; tableName: "applications"; dataType: "string"; columnType: "PgVarchar"; data: string; driverParam: string; notNull: true; ... 7 more ...; generated: undefined; }, {}, { ...; }>; ... 9 more ...; appliedAt: PgColumn<......'.
+13:39:09.387 server/application-tracker.ts(77,31): error TS2339: Property 'updatedAt' does not exist on type 'PgTableWithColumns<{ name: "applications"; schema: undefined; columns: { id: PgColumn<{ name: "id"; tableName: "applications"; dataType: "string"; columnType: "PgVarchar"; data: string; driverParam: string; notNull: true; ... 7 more ...; generated: undefined; }, {}, { ...; }>; ... 9 more ...; appliedAt: PgColumn<......'.
+13:39:09.387 
+13:39:22.179 Build Completed in /vercel/output [30s]
+13:39:22.623 Deploying outputs...
+13:39:30.568 Deployment completed
+13:39:31.373 Creating build cache...
+13:39:57.927 Created build cache: 26.554s
+13:39:57.929 Uploading build cache [97.97 MB]
+13:39:59.730 Build cache uploaded: 1.801s
