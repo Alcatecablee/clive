@@ -655,7 +655,10 @@ export default function Index() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    console.log("🚀 [CONTACT FORM] Form submission started");
     event.preventDefault();
+    
+    console.log("📝 [CONTACT FORM] Setting status to loading");
     setContactStatus("loading");
     setErrorMessage("");
 
@@ -666,7 +669,14 @@ export default function Index() {
       message: formData.get("message") as string,
     };
 
+    console.log("📋 [CONTACT FORM] Form data collected - fields:", {
+      hasName: !!data.name,
+      hasEmail: !!data.email,
+      messageLength: data.message?.length || 0,
+    });
+
     try {
+      console.log("🌐 [CONTACT FORM] Sending POST request to /api/contact");
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -675,20 +685,41 @@ export default function Index() {
         body: JSON.stringify(data),
       });
 
+      console.log("📡 [CONTACT FORM] Response received:", {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
+      });
+
       const result = await response.json();
+      console.log("📦 [CONTACT FORM] Response data:", {
+        success: result.success,
+        hasMessage: !!result.message,
+        hasError: !!result.error,
+      });
 
       if (result.success) {
+        console.log("✅ [CONTACT FORM] Success! Setting status to success");
         setContactStatus("success");
+        console.log("🔄 [CONTACT FORM] Resetting form");
         event.currentTarget.reset();
-        setTimeout(() => setContactStatus("idle"), 5000);
+        console.log("⏱️ [CONTACT FORM] Setting 5-second timeout to reset status");
+        setTimeout(() => {
+          console.log("🔄 [CONTACT FORM] Timeout complete - resetting status to idle");
+          setContactStatus("idle");
+        }, 5000);
       } else {
+        console.log("❌ [CONTACT FORM] Request failed - error type:", typeof result.error);
         setContactStatus("error");
         setErrorMessage(result.error || "Failed to send message");
       }
     } catch (error) {
+      console.error("💥 [CONTACT FORM] Network error occurred:", error instanceof Error ? error.message : 'Unknown error');
       setContactStatus("error");
       setErrorMessage("Network error. Please try again.");
     }
+    
+    console.log("🏁 [CONTACT FORM] Form submission process completed");
   };
 
   return (

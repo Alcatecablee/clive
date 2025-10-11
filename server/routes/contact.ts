@@ -11,11 +11,30 @@ const contactSchema = z.object({
 });
 
 router.post("/", async (req: Request, res: Response) => {
+  console.log("🚀 [API CONTACT] POST request received");
+  console.log("📋 [API CONTACT] Request body fields:", {
+    hasName: !!req.body?.name,
+    hasEmail: !!req.body?.email,
+    hasMessage: !!req.body?.message,
+    messageLength: req.body?.message?.length || 0,
+  });
+  
   try {
+    console.log("🔍 [API CONTACT] Validating request data with Zod schema");
     const validatedData = contactSchema.parse(req.body);
     const { name, email, message } = validatedData;
+    
+    console.log("✅ [API CONTACT] Validation successful - data fields:", {
+      hasName: !!name,
+      hasEmail: !!email,
+      messageLength: message.length,
+    });
 
+    console.log("🔐 [API CONTACT] Getting Resend client credentials");
     const { client: resend } = await getUncachableResendClient();
+    console.log("✅ [API CONTACT] Resend client initialized successfully");
+
+    console.log("📧 [API CONTACT] Preparing to send email via Resend API");
 
     const { data, error } = await resend.emails.send({
       from: "Portfolio Contact <contact@justc.live>",
@@ -39,28 +58,31 @@ router.post("/", async (req: Request, res: Response) => {
     });
 
     if (error) {
-      console.error("Resend API error:", error);
+      console.error("❌ [API CONTACT] Resend API error - type:", typeof error);
       return res.status(500).json({
         success: false,
         error: "Failed to send email",
       });
     }
 
-    console.log("Email sent successfully:", data);
+    console.log("✅ [API CONTACT] Email sent successfully! Email ID:", data?.id || 'unknown');
 
+    console.log("📤 [API CONTACT] Sending success response to client");
     res.json({
       success: true,
       message: "Message sent successfully! I'll get back to you soon.",
     });
+    console.log("🏁 [API CONTACT] Request completed successfully");
   } catch (error) {
     if (error instanceof z.ZodError) {
+      console.error("❌ [API CONTACT] Validation error - field count:", error.errors.length);
       return res.status(400).json({
         success: false,
         error: error.errors[0].message,
       });
     }
 
-    console.error("Contact form error:", error);
+    console.error("💥 [API CONTACT] Unexpected error type:", error instanceof Error ? error.constructor.name : typeof error);
     res.status(500).json({
       success: false,
       error: "An unexpected error occurred. Please try again.",

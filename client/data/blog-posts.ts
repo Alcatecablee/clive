@@ -16,10 +16,12 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Master the K53 learner's license test with proven strategies, official study resources, and expert tips from South Africa's certified testing platform.",
     date: "2025-10-10",
     readTime: "12 min read",
-    image: "/attached_assets/stock_images/person_studying_lear_fc6b74a3.jpg",
+    image: "/attached_assets/stock_images/student_studying_wit_04bb9099.jpg",
     category: "Education",
     content: `
       <p>Passing your K53 learner's license test is the first crucial step toward driving independence in South Africa. Whether you're a first-time test-taker or someone who needs to retake the exam, this comprehensive guide will equip you with everything you need to succeed. With the right preparation, study strategies, and understanding of the test format, you can confidently pass your learner's license on your first attempt.</p>
+
+      <img src="/attached_assets/stock_images/road_traffic_signs_l_ebbb0c93.jpg" alt="Road traffic signs for learner's license" class="my-8 rounded-lg shadow-lg w-full" />
 
       <h2>Understanding the K53 Learner's License Test Format</h2>
       
@@ -265,6 +267,8 @@ export const blogPosts: BlogPost[] = [
       
       <p>Retirement annuity (RA) contributions are one of the most powerful tax optimization tools available to South African taxpayers. They provide dual benefits: reducing your current tax liability while securing your financial future.</p>
 
+      <img src="/attached_assets/stock_images/retirement_planning__d37a2d10.jpg" alt="Retirement planning and financial documents" class="my-8 rounded-lg shadow-lg w-full" />
+
       <h3>Understanding the 27.5% Deduction Limit</h3>
       
       <p>For the 2025 tax year, you can deduct retirement fund contributions up to 27.5% of your taxable income or remuneration, capped at R350,000 annually. This means:</p>
@@ -307,6 +311,8 @@ export const blogPosts: BlogPost[] = [
       <h2>Home Office Deductions for Remote Workers</h2>
       
       <p>The rise of remote work has made home office deductions increasingly relevant. If you work from home, you may be entitled to significant tax deductions.</p>
+
+      <img src="/attached_assets/stock_images/home_office_desk_com_85359384.jpg" alt="Home office setup for remote work" class="my-8 rounded-lg shadow-lg w-full" />
 
       <h3>Qualifying for Home Office Deductions</h3>
       
@@ -619,6 +625,8 @@ export const blogPosts: BlogPost[] = [
       <h3>The Remote Work Revolution</h3>
       
       <p>The shift to remote and hybrid work models has fundamentally changed IT support requirements. Employees working from home, co-working spaces, or on the go need the same level of IT support as those in traditional offices. Remote IT support perfectly addresses this need by providing consistent, location-independent assistance.</p>
+
+      <img src="/attached_assets/stock_images/it_professional_prov_1f2f9449.jpg" alt="IT professional providing remote technical support" class="my-8 rounded-lg shadow-lg w-full" />
 
       <h2>Key Benefits of Professional Remote IT Support</h2>
       
