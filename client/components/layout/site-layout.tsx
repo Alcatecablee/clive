@@ -11,6 +11,7 @@ const navItems = [
     label: "Experience",
     title: "Explore business experience",
   },
+  { href: "/blog", label: "Blog", title: "Read expert insights and articles" },
   { href: "/#contact", label: "Contact", title: "Reach the contact section" },
 ];
 
@@ -128,6 +129,29 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
               >
                 <Twitter className="h-4 w-4" aria-hidden />
                 @just_clive_sa
+              </a>
+            </div>
+          </div>
+          <div className="grid gap-6 text-sm text-muted-foreground">
+            <p className="text-sm font-semibold text-foreground">Quick Links</p>
+            <div className="flex flex-col gap-3">
+              <Link
+                to="/blog"
+                className="inline-flex items-center gap-2 transition hover:text-primary"
+              >
+                Blog & Insights
+              </Link>
+              <a
+                href="/#about"
+                className="inline-flex items-center gap-2 transition hover:text-primary"
+              >
+                About
+              </a>
+              <a
+                href="/#experience"
+                className="inline-flex items-center gap-2 transition hover:text-primary"
+              >
+                Experience
               </a>
             </div>
           </div>

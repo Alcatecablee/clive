@@ -16,7 +16,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Master the K53 learner's license test with proven strategies, official study resources, and expert tips from South Africa's certified testing platform.",
     date: "2025-10-10",
     readTime: "12 min read",
-    image: "/attached_assets/stock_images/person_studying_lear_e685e013.jpg",
+    image: "/attached_assets/stock_images/person_studying_lear_fc6b74a3.jpg",
     category: "Education",
     content: `
       <p>Passing your K53 learner's license test is the first crucial step toward driving independence in South Africa. Whether you're a first-time test-taker or someone who needs to retake the exam, this comprehensive guide will equip you with everything you need to succeed. With the right preparation, study strategies, and understanding of the test format, you can confidently pass your learner's license on your first attempt.</p>
@@ -196,7 +196,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Discover how to maximize your SARS refund with medical aid credits, retirement annuity deductions, and expert tax optimization strategies for 2025.",
     date: "2025-10-09",
     readTime: "15 min read",
-    image: "/attached_assets/stock_images/south_african_tax_do_818370b6.jpg",
+    image: "/attached_assets/stock_images/south_african_tax_do_21cd6f30.jpg",
     category: "Finance",
     content: `
       <p>Tax season in South Africa can be overwhelming, but it also presents a valuable opportunity to maximize your tax refund. With strategic planning and a thorough understanding of available deductions and tax credits, you can legally reduce your tax liability and increase your refund from the South African Revenue Service (SARS). This comprehensive guide will walk you through expert strategies to optimize your 2025 tax return.</p>
@@ -596,7 +596,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Explore how remote IT support is transforming business operations in South Africa with cost-effective solutions and professional helpdesk expertise.",
     date: "2025-10-08",
     readTime: "10 min read",
-    image: "/attached_assets/stock_images/it_professional_remo_16f7af75.jpg",
+    image: "/attached_assets/stock_images/it_professional_remo_ea5f7d7b.jpg",
     category: "Technology",
     content: `
       <p>The digital transformation of South African businesses has accelerated dramatically in recent years, bringing with it an increased reliance on technology and the critical need for reliable IT support. As companies navigate this digital landscape, remote IT support and professional helpdesk services have emerged as essential components of successful business operations. This comprehensive guide explores why South African businesses need to embrace professional remote IT support and how it's shaping the future of business technology management.</p>

@@ -1,10 +1,25 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { blogPosts } from "@/data/blog-posts";
 
 export default function Blog() {
   return (
     <div className="flex flex-col">
+      <Helmet>
+        <title>Blog & Insights - Just Clive | Technology, Entrepreneurship & Digital Innovation</title>
+        <meta name="description" content="Expert perspectives on technology, entrepreneurship, and digital innovation in South Africa. Learn about K53 driving tests, SARS tax optimization, remote IT support, and more." />
+        <meta name="keywords" content="South Africa blog, technology insights, entrepreneurship tips, K53 learner's license, SARS tax refund, remote IT support, BurbGigz, SuperK53, Taxfy" />
+        <link rel="canonical" href="https://justc.live/blog" />
+        <meta property="og:title" content="Blog & Insights - Just Clive" />
+        <meta property="og:description" content="Expert perspectives on technology, entrepreneurship, and digital innovation in South Africa" />
+        <meta property="og:url" content="https://justc.live/blog" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Blog & Insights - Just Clive" />
+        <meta name="twitter:description" content="Expert perspectives on technology, entrepreneurship, and digital innovation in South Africa" />
+      </Helmet>
+
       <section className="bg-gradient-to-br from-background via-background to-primary/5 py-20 sm:py-28">
         <div className="mx-auto w-full max-w-6xl px-6">
           <div className="space-y-4 text-center">
