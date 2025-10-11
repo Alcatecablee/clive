@@ -132,3 +132,61 @@
     }
   }
 }
+
+@layer components {
+  .prose h2 {
+    @apply mt-12 mb-6 font-display text-3xl font-bold tracking-tight;
+  }
+
+  .prose h3 {
+    @apply mt-8 mb-4 font-display text-2xl font-bold tracking-tight;
+  }
+
+  .prose p {
+    @apply mb-6 text-lg leading-relaxed text-foreground/90;
+  }
+
+  .prose ul {
+    @apply my-6 ml-6 list-disc space-y-2;
+  }
+
+  .prose ul li {
+    @apply text-lg leading-relaxed text-foreground/90;
+  }
+
+  .prose a {
+    @apply text-primary font-medium underline-offset-4 hover:underline transition-colors;
+  }
+
+  .prose strong {
+    @apply font-semibold text-foreground;
+  }
+
+  .prose ol {
+    @apply my-6 ml-6 list-decimal space-y-2;
+  }
+
+  .prose ol li {
+    @apply text-lg leading-relaxed text-foreground/90;
+  }
+
+  .prose blockquote {
+    @apply my-6 border-l-4 border-primary pl-6 italic text-muted-foreground;
+  }
+
+  .prose code {
+    @apply rounded bg-muted px-1.5 py-0.5 font-mono text-sm;
+  }
+
+  .prose pre {
+    @apply my-6 overflow-x-auto rounded-lg bg-muted p-4;
+  }
+
+  .prose img {
+    @apply my-8 rounded-lg;
+  }
+
+  .prose hr {
+    @apply my-12 border-t border-border;
+  }
+}
