@@ -1,10 +1,13 @@
 import { FormEvent, useState, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 import {
+  ArrowRight,
   BadgeCheck,
   Building2,
   CalendarDays,
   ChevronDown,
+  Clock,
   ExternalLink,
   Headset,
   Layers,
@@ -21,6 +24,7 @@ import {
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { blogPosts } from "@/data/blog-posts";
 
 type StatCard = {
   value: string;
@@ -648,6 +652,48 @@ function ContactChannelCard({ channel }: { channel: ContactChannel }) {
   );
 }
 
+function BlogPostCard({ post }: { post: typeof blogPosts[0] }) {
+  return (
+    <Link
+      to={`/blog/${post.id}`}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card/80 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-primary/50 hover:shadow-xl"
+    >
+      <div className="aspect-[16/9] overflow-hidden">
+        <img
+          src={post.image}
+          alt={post.title}
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <div className="mb-3 flex items-center gap-4 text-sm text-muted-foreground">
+          <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            {post.category}
+          </span>
+          <span className="flex items-center gap-1">
+            <CalendarDays className="h-3 w-3" />
+            {new Date(post.date).toLocaleDateString('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' })}
+          </span>
+          <span className="flex items-center gap-1">
+            <Clock className="h-3 w-3" />
+            {post.readTime}
+          </span>
+        </div>
+        <h3 className="mb-3 font-display text-xl font-semibold leading-tight text-foreground transition-colors group-hover:text-primary">
+          {post.title}
+        </h3>
+        <p className="mb-4 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+          {post.excerpt}
+        </p>
+        <div className="mt-auto flex items-center gap-2 text-sm font-semibold text-primary">
+          Read More
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export default function Index() {
   const [contactStatus, setContactStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -730,6 +776,7 @@ export default function Index() {
       <SkillsSection />
       <ServicesSection />
       <TestimonialsSection />
+      <BlogSection />
       <FAQSection />
       <ContactSection
         status={contactStatus}
@@ -979,6 +1026,36 @@ function TestimonialsSection() {
             testimonial={testimonial}
           />
         ))}
+      </div>
+    </SectionWrapper>
+  );
+}
+
+function BlogSection() {
+  const latestPosts = [...blogPosts]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 3);
+  
+  return (
+    <SectionWrapper className="bg-background">
+      <SectionHeading
+        eyebrow="Blog & Insights"
+        title="Latest Articles"
+        description="Expert perspectives on technology, entrepreneurship, and digital innovation in South Africa."
+      />
+      <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {latestPosts.map((post) => (
+          <BlogPostCard key={post.id} post={post} />
+        ))}
+      </div>
+      <div className="mt-12 flex justify-center">
+        <Link
+          to="/blog"
+          className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-transform duration-200 hover:-translate-y-0.5 hover:bg-primary/90"
+        >
+          View All Articles
+          <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
     </SectionWrapper>
   );
