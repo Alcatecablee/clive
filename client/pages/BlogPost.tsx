@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Calendar, Clock, ArrowLeft, ExternalLink, Share2, List, Eye, Link as LinkIcon, Check } from "lucide-react";
 import { blogPosts } from "@/data/blog-posts";
 import { calculateReadTime, stripHtmlTags, getViewCount, incrementViewCount, formatViewCount } from "@/lib/blog-utils";
+import { Breadcrumb } from "@/components/breadcrumb";
 
 interface TocHeading {
   id: string;
@@ -228,6 +229,13 @@ export default function BlogPost() {
   
   const accurateReadTime = post ? calculateReadTime(stripHtmlTags(post.content)) : '';
   
+  const breadcrumbItems = post ? [
+    { label: "Home", href: "/" },
+    { label: "Blog", href: "/blog" },
+    { label: post.category, href: `/blog?category=${encodeURIComponent(post.category)}` },
+    { label: post.title.length > 50 ? post.title.substring(0, 50) + "..." : post.title }
+  ] : [];
+  
   const relatedPosts = post 
     ? blogPosts.filter((p) => p.id !== post.id && p.category === post.category).slice(0, 2)
     : [];
@@ -312,13 +320,7 @@ export default function BlogPost() {
 
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 py-16 sm:py-24">
         <div className="mx-auto w-full max-w-4xl px-6">
-          <Link
-            to="/blog"
-            className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Blog
-          </Link>
+          <Breadcrumb items={breadcrumbItems} />
           
           <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">

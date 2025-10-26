@@ -1,19 +1,28 @@
-import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Calendar, Clock, ArrowRight, Search, X, Tag } from "lucide-react";
 import { blogPosts } from "@/data/blog-posts";
 import { NewsletterForm } from "@/components/newsletter-form";
 
 export default function Blog() {
+  const [searchParams] = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState(categoryParam || "All");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const categories = useMemo(() => {
     const uniqueCategories = Array.from(new Set(blogPosts.map((post) => post.category)));
     return ["All", ...uniqueCategories.sort()];
   }, []);
+
+  useEffect(() => {
+    if (categoryParam && categories.includes(categoryParam)) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [categoryParam, categories]);
 
   const allTags = useMemo(() => {
     const tagSet = new Set<string>();
