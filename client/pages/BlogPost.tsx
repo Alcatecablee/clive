@@ -1,8 +1,100 @@
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useState, useEffect } from "react";
-import { Calendar, Clock, ArrowLeft, ExternalLink, Share2 } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
+import { Calendar, Clock, ArrowLeft, ExternalLink, Share2, List } from "lucide-react";
 import { blogPosts } from "@/data/blog-posts";
+
+interface TocHeading {
+  id: string;
+  text: string;
+  level: number;
+}
+
+function TableOfContents({ content }: { content: string }) {
+  const [activeId, setActiveId] = useState<string>("");
+  
+  const headings = useMemo(() => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(content, 'text/html');
+    const headingElements = doc.querySelectorAll('h2, h3');
+    
+    return Array.from(headingElements).map((heading, index) => {
+      const text = heading.textContent || '';
+      const id = heading.id || `heading-${index}`;
+      const level = parseInt(heading.tagName.substring(1));
+      return { id, text, level };
+    });
+  }, [content]);
+
+  useEffect(() => {
+    const contentDiv = document.querySelector('.prose');
+    if (!contentDiv) return;
+
+    const headingElements = contentDiv.querySelectorAll('h2, h3');
+    headingElements.forEach((heading, index) => {
+      if (!heading.id) {
+        heading.id = `heading-${index}`;
+      }
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-100px 0px -80% 0px' }
+    );
+
+    headingElements.forEach((heading) => observer.observe(heading));
+
+    return () => observer.disconnect();
+  }, [content]);
+
+  if (headings.length === 0) return null;
+
+  const scrollToHeading = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <nav className="hidden lg:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto rounded-xl border border-border bg-card/50 p-6">
+      <div className="flex items-center gap-2 mb-4 text-sm font-semibold text-foreground">
+        <List className="h-4 w-4" />
+        Table of Contents
+      </div>
+      <ul className="space-y-2 text-sm">
+        {headings.map((heading) => (
+          <li
+            key={heading.id}
+            className={`${heading.level === 3 ? 'ml-4' : ''}`}
+          >
+            <button
+              onClick={() => scrollToHeading(heading.id)}
+              className={`text-left w-full py-1 transition-colors hover:text-primary ${
+                activeId === heading.id
+                  ? 'text-primary font-medium'
+                  : 'text-muted-foreground'
+              }`}
+            >
+              {heading.text}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
 
 function ReadingProgressBar() {
   const [progress, setProgress] = useState(0);
@@ -216,61 +308,69 @@ export default function BlogPost() {
       </section>
 
       <section className="py-16">
-        <div className="mx-auto w-full max-w-4xl px-6">
-          <div className="mb-12 overflow-hidden rounded-xl">
-            <img
-              src={post.image}
-              alt={post.title}
-              className="h-auto w-full"
-            />
-          </div>
-
-          <SocialShareButtons post={post} />
-
-          <div
-            className="prose prose-lg mt-12 max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
-
-          {relatedPosts.length > 0 && (
-            <div className="mt-16 border-t border-border pt-16">
-              <h2 className="mb-8 font-display text-2xl font-bold">Related Articles</h2>
-              <div className="grid gap-6 sm:grid-cols-2">
-                {relatedPosts.map((relatedPost) => (
-                  <Link
-                    key={relatedPost.id}
-                    to={`/blog/${relatedPost.id}`}
-                    className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-lg"
-                  >
-                    <div className="aspect-[16/9] overflow-hidden">
-                      <img
-                        src={relatedPost.image}
-                        alt={relatedPost.title}
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="flex flex-1 flex-col p-6">
-                      <div className="mb-3 flex items-center gap-4 text-sm text-muted-foreground">
-                        <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                          {relatedPost.category}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          {relatedPost.readTime}
-                        </span>
-                      </div>
-                      <h3 className="mb-2 font-display text-lg font-semibold leading-tight text-foreground">
-                        {relatedPost.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground line-clamp-2">
-                        {relatedPost.excerpt}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
+        <div className="mx-auto w-full max-w-7xl px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12">
+            <div className="min-w-0">
+              <div className="mb-12 overflow-hidden rounded-xl">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="h-auto w-full"
+                />
               </div>
+
+              <SocialShareButtons post={post} />
+
+              <div
+                className="prose prose-lg mt-12 max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+
+              {relatedPosts.length > 0 && (
+                <div className="mt-16 border-t border-border pt-16">
+                  <h2 className="mb-8 font-display text-2xl font-bold">Related Articles</h2>
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    {relatedPosts.map((relatedPost) => (
+                      <Link
+                        key={relatedPost.id}
+                        to={`/blog/${relatedPost.id}`}
+                        className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-lg"
+                      >
+                        <div className="aspect-[16/9] overflow-hidden">
+                          <img
+                            src={relatedPost.image}
+                            alt={relatedPost.title}
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                        <div className="flex flex-1 flex-col p-6">
+                          <div className="mb-3 flex items-center gap-4 text-sm text-muted-foreground">
+                            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                              {relatedPost.category}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="h-3 w-3" />
+                              {relatedPost.readTime}
+                            </span>
+                          </div>
+                          <h3 className="mb-2 font-display text-lg font-semibold leading-tight text-foreground">
+                            {relatedPost.title}
+                          </h3>
+                          <p className="text-sm text-muted-foreground line-clamp-2">
+                            {relatedPost.excerpt}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-          )}
+            
+            <aside className="hidden lg:block">
+              <TableOfContents content={post.content} />
+            </aside>
+          </div>
         </div>
       </section>
     </article>
