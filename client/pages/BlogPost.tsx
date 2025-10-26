@@ -1,7 +1,46 @@
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useState, useEffect } from "react";
 import { Calendar, Clock, ArrowLeft, ExternalLink, Share2 } from "lucide-react";
 import { blogPosts } from "@/data/blog-posts";
+
+function ReadingProgressBar() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const calculateProgress = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY;
+      const trackLength = documentHeight - windowHeight;
+      const progressPercentage = (scrollTop / trackLength) * 100;
+      setProgress(Math.min(progressPercentage, 100));
+    };
+
+    calculateProgress();
+    window.addEventListener('scroll', calculateProgress);
+    window.addEventListener('resize', calculateProgress);
+
+    return () => {
+      window.removeEventListener('scroll', calculateProgress);
+      window.removeEventListener('resize', calculateProgress);
+    };
+  }, []);
+
+  return (
+    <div className="fixed left-0 top-0 z-50 h-1 w-full bg-transparent">
+      <div
+        className="h-full bg-gradient-to-r from-primary via-primary/80 to-primary transition-all duration-200 ease-out"
+        style={{ width: `${progress}%` }}
+        role="progressbar"
+        aria-valuenow={Math.round(progress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Reading progress"
+      />
+    </div>
+  );
+}
 
 function SocialShareButtons({ post }: { post: { id: string; title: string; excerpt: string } }) {
   const postUrl = `https://justc.live/blog/${post.id}`;
@@ -90,8 +129,10 @@ export default function BlogPost() {
   }
 
   return (
-    <article className="flex flex-col">
-      <Helmet>
+    <>
+      <ReadingProgressBar />
+      <article className="flex flex-col">
+        <Helmet>
         <title>{post.title} - Just Clive Blog</title>
         <meta name="description" content={post.excerpt} />
         <meta name="keywords" content={`${post.category}, South Africa, ${post.title.split(' ').slice(0, 5).join(', ')}`} />
@@ -233,5 +274,6 @@ export default function BlogPost() {
         </div>
       </section>
     </article>
+    </>
   );
 }
