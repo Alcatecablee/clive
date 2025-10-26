@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Calendar, Clock, ArrowRight, Search, X, Tag } from "lucide-react";
 import { blogPosts } from "@/data/blog-posts";
+import { NewsletterForm } from "@/components/newsletter-form";
 
 export default function Blog() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -217,6 +218,14 @@ export default function Blog() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      <section className="bg-gradient-to-b from-background to-primary/5 py-20">
+        <div className="mx-auto w-full max-w-6xl px-6">
+          <div className="mx-auto max-w-2xl">
+            <NewsletterForm />
+          </div>
         </div>
       </section>
     </div>

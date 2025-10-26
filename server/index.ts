@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import contactRouter from "./routes/contact";
+import newsletterRouter from "./routes/newsletter";
 
 export function createServer() {
   const app = express();
@@ -22,6 +23,9 @@ export function createServer() {
 
   // Contact form route
   app.use("/api/contact", contactRouter);
+  
+  // Newsletter subscription route
+  app.use("/api/newsletter", newsletterRouter);
 
   return app;
 }
