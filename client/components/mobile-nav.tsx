@@ -1,19 +1,53 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/#about", label: "About" },
-  { href: "/#experience", label: "Experience" },
-  { href: "/blog", label: "Blog" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/#about", label: "About", section: "about" },
+  { href: "/#experience", label: "Experience", section: "experience" },
+  { href: "/blog", label: "Blog", section: null },
+  { href: "/#contact", label: "Contact", section: "contact" },
 ];
 
-export function MobileNav() {
-  const [isOpen, setIsOpen] = useState(false);
+interface MobileNavProps {
+  activeSection: string;
+}
 
-  const handleClick = () => {
+export function MobileNav({ activeSection }: MobileNavProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/#")) {
+      e.preventDefault();
+      const sectionId = href.substring(2);
+      
+      if (location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 100);
+      } else {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+          window.history.pushState(null, "", href);
+        }
+      }
+    }
     setIsOpen(false);
+  };
+
+  const isActive = (item: typeof navItems[0]) => {
+    if (item.section === null && location.pathname === "/blog") {
+      return true;
+    }
+    return location.pathname === "/" && activeSection === item.section;
   };
 
   return (
@@ -52,15 +86,19 @@ export function MobileNav() {
                 <a
                   key={item.href}
                   href={item.href}
-                  onClick={handleClick}
-                  className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
+                  onClick={(e) => handleClick(e, item.href)}
+                  className={cn(
+                    "block rounded-lg px-4 py-3 text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground",
+                    isActive(item) ? "bg-accent/50 text-foreground font-semibold" : "text-foreground"
+                  )}
+                  aria-current={isActive(item) ? "page" : undefined}
                 >
                   {item.label}
                 </a>
               ))}
               <a
                 href="/#contact"
-                onClick={handleClick}
+                onClick={(e) => handleClick(e, "/#contact")}
                 className="mt-4 block rounded-full bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 Let's Connect

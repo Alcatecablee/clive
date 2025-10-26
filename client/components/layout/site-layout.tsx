@@ -1,18 +1,21 @@
 import type { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Mail, Phone, ExternalLink, Twitter } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileNav } from "@/components/mobile-nav";
+import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/#about", label: "About", title: "Go to About section" },
+  { href: "/#about", label: "About", title: "Go to About section", section: "about" },
   {
     href: "/#experience",
     label: "Experience",
     title: "Explore business experience",
+    section: "experience",
   },
-  { href: "/blog", label: "Blog", title: "Read expert insights and articles" },
-  { href: "/#contact", label: "Contact", title: "Reach the contact section" },
+  { href: "/blog", label: "Blog", title: "Read expert insights and articles", section: null },
+  { href: "/#contact", label: "Contact", title: "Reach the contact section", section: "contact" },
 ];
 
 const footerLinks = [
@@ -22,6 +25,92 @@ const footerLinks = [
 ];
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState<string>("about");
+
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      setActiveSection("");
+      return;
+    }
+
+    const sections = ["about", "experience", "contact"];
+    
+    const checkInitialSection = () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sections[i]);
+        if (element && element.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    checkInitialSection();
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -20% 0px",
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      const intersectingEntries = entries.filter(entry => entry.isIntersecting);
+      if (intersectingEntries.length > 0) {
+        const mostVisible = intersectingEntries.reduce((prev, current) => 
+          current.intersectionRatio > prev.intersectionRatio ? current : prev
+        );
+        setActiveSection(mostVisible.target.id);
+      }
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [location.pathname]);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/#")) {
+      e.preventDefault();
+      const sectionId = href.substring(2);
+      
+      if (location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 100);
+      } else {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+          window.history.pushState(null, "", href);
+        }
+      }
+    }
+  };
+
+  const isActive = (item: typeof navItems[0]) => {
+    if (item.section === null && location.pathname === "/blog") {
+      return true;
+    }
+    return location.pathname === "/" && activeSection === item.section;
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <a
@@ -56,7 +145,12 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
                 key={item.href}
                 href={item.href}
                 title={item.title}
-                className="transition-colors hover:text-foreground"
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={cn(
+                  "transition-colors hover:text-foreground",
+                  isActive(item) && "text-foreground font-semibold"
+                )}
+                aria-current={isActive(item) ? "page" : undefined}
               >
                 {item.label}
               </a>
@@ -67,11 +161,12 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
             <a
               href="/#contact"
               title="Open the contact section"
+              onClick={(e) => handleNavClick(e, "/#contact")}
               className="hidden rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:bg-primary/90 md:inline-flex"
             >
               Let's Connect
             </a>
-            <MobileNav />
+            <MobileNav activeSection={activeSection} />
           </div>
         </div>
       </header>
