@@ -1,8 +1,9 @@
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useState, useEffect, useMemo } from "react";
-import { Calendar, Clock, ArrowLeft, ExternalLink, Share2, List } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, ExternalLink, Share2, List, Eye } from "lucide-react";
 import { blogPosts } from "@/data/blog-posts";
+import { calculateReadTime, stripHtmlTags, getViewCount, incrementViewCount, formatViewCount } from "@/lib/blog-utils";
 
 interface TocHeading {
   id: string;
@@ -195,6 +196,9 @@ function SocialShareButtons({ post }: { post: { id: string; title: string; excer
 export default function BlogPost() {
   const { id } = useParams<{ id: string }>();
   const post = blogPosts.find((p) => p.id === id);
+  const [viewCount, setViewCount] = useState(0);
+  
+  const accurateReadTime = post ? calculateReadTime(stripHtmlTags(post.content)) : '';
   
   const relatedPosts = post 
     ? blogPosts.filter((p) => p.id !== post.id && p.category === post.category).slice(0, 2)
@@ -204,6 +208,13 @@ export default function BlogPost() {
     const otherPosts = blogPosts.filter((p) => p.id !== post?.id && p.category !== post?.category);
     relatedPosts.push(...otherPosts.slice(0, 2 - relatedPosts.length));
   }
+
+  useEffect(() => {
+    if (post?.id) {
+      const newCount = incrementViewCount(post.id);
+      setViewCount(newCount);
+    }
+  }, [post?.id]);
 
   if (!post) {
     return (
@@ -282,7 +293,7 @@ export default function BlogPost() {
           </Link>
           
           <div className="space-y-4">
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
               <span className="rounded-full bg-primary/10 px-3 py-1 font-medium text-primary">
                 {post.category}
               </span>
@@ -292,7 +303,11 @@ export default function BlogPost() {
               </span>
               <span className="flex items-center gap-1">
                 <Clock className="h-4 w-4" />
-                {post.readTime}
+                {accurateReadTime}
+              </span>
+              <span className="flex items-center gap-1" title={`This post has been viewed ${viewCount} ${viewCount === 1 ? 'time' : 'times'}`}>
+                <Eye className="h-4 w-4" />
+                {formatViewCount(viewCount)}
               </span>
             </div>
             
