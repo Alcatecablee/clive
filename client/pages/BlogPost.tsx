@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useState, useEffect, useMemo } from "react";
-import { Calendar, Clock, ArrowLeft, ExternalLink, Share2, List, Eye } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, ExternalLink, Share2, List, Eye, Link as LinkIcon, Check } from "lucide-react";
 import { blogPosts } from "@/data/blog-posts";
 import { calculateReadTime, stripHtmlTags, getViewCount, incrementViewCount, formatViewCount } from "@/lib/blog-utils";
 
@@ -136,6 +136,7 @@ function ReadingProgressBar() {
 }
 
 function SocialShareButtons({ post }: { post: { id: string; title: string; excerpt: string } }) {
+  const [copied, setCopied] = useState(false);
   const postUrl = `https://justc.live/blog/${post.id}`;
   const shareText = post.title;
 
@@ -143,6 +144,16 @@ function SocialShareButtons({ post }: { post: { id: string; title: string; excer
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(shareText)}`,
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`,
     whatsapp: `https://wa.me/?text=${encodeURIComponent(shareText + " " + postUrl)}`,
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(postUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy link:', err);
+    }
   };
 
   return (
@@ -188,6 +199,23 @@ function SocialShareButtons({ post }: { post: { id: string; title: string; excer
           </svg>
           WhatsApp
         </a>
+        <button
+          onClick={handleCopyLink}
+          className="flex items-center gap-2 rounded-lg border-2 border-border bg-background px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:border-primary hover:bg-accent hover:shadow-md"
+          aria-label={copied ? "Link copied" : "Copy link to clipboard"}
+        >
+          {copied ? (
+            <>
+              <Check className="h-4 w-4 text-green-600" />
+              <span className="text-green-600">Copied!</span>
+            </>
+          ) : (
+            <>
+              <LinkIcon className="h-4 w-4" />
+              Copy Link
+            </>
+          )}
+        </button>
       </div>
     </div>
   );
