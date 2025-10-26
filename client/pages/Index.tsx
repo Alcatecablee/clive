@@ -1143,11 +1143,8 @@ function ContactSection({
               WhatsApp Support
             </h3>
             <p className="text-sm text-muted-foreground">
-              Instant messaging for urgent IT support and quick consultations
+              Instant messaging for urgent IT support and quick consultations. Click below to start a conversation.
             </p>
-            <span className="text-sm font-medium text-green-600">
-              +27 67 049 4876
-            </span>
             <a
               href="https://wa.me/27670494876?text=Hi%20Clive,%20I%20need%20help%20with"
               target="_blank"

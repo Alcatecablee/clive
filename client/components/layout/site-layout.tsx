@@ -204,7 +204,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
                 aria-label="Chat with Clive on WhatsApp"
               >
                 <Phone className="h-4 w-4" aria-hidden />
-                +27 67 049 4876
+                WhatsApp Chat
               </a>
               <a
                 href="mailto:hello@justc.live"
