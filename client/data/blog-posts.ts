@@ -6,6 +6,7 @@ export interface BlogPost {
   readTime: string;
   image: string;
   category: string;
+  tags: string[];
   content: string;
 }
 
@@ -18,6 +19,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "12 min read",
     image: "/attached_assets/stock_images/student_studying_wit_04bb9099.jpg",
     category: "Education",
+    tags: ["K53", "Learner's License", "Driving Test", "Study Tips", "South Africa", "Road Rules"],
     content: `
       <p>Passing your K53 learner's license test is the first crucial step toward driving independence in South Africa. Whether you're a first-time test-taker or someone who needs to retake the exam, this comprehensive guide will equip you with everything you need to succeed. With the right preparation, study strategies, and understanding of the test format, you can confidently pass your learner's license on your first attempt.</p>
 
@@ -200,6 +202,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "15 min read",
     image: "/attached_assets/stock_images/south_african_tax_do_21cd6f30.jpg",
     category: "Finance",
+    tags: ["SARS", "Tax Refund", "Tax Optimization", "Medical Aid", "Retirement Annuity", "Finance Tips"],
     content: `
       <p>Tax season in South Africa can be overwhelming, but it also presents a valuable opportunity to maximize your tax refund. With strategic planning and a thorough understanding of available deductions and tax credits, you can legally reduce your tax liability and increase your refund from the South African Revenue Service (SARS). This comprehensive guide will walk you through expert strategies to optimize your 2025 tax return.</p>
 
@@ -604,6 +607,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "10 min read",
     image: "/attached_assets/stock_images/it_professional_remo_ea5f7d7b.jpg",
     category: "Technology",
+    tags: ["IT Support", "Remote Work", "Helpdesk", "Business Technology", "Cloud Services", "Cybersecurity"],
     content: `
       <p>The digital transformation of South African businesses has accelerated dramatically in recent years, bringing with it an increased reliance on technology and the critical need for reliable IT support. As companies navigate this digital landscape, remote IT support and professional helpdesk services have emerged as essential components of successful business operations. This comprehensive guide explores why South African businesses need to embrace professional remote IT support and how it's shaping the future of business technology management.</p>
 
@@ -986,6 +990,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "14 min read",
     image: "/attached_assets/stock_images/entrepreneur_startup_9e073f87.jpg",
     category: "Entrepreneurship",
+    tags: ["Startup", "Entrepreneurship", "Business Registration", "Funding", "Tech Ecosystem", "MVP"],
     content: `
       <p>South Africa's tech ecosystem is experiencing unprecedented growth, with startups raising record funding and innovative digital solutions transforming traditional industries. If you've been dreaming of launching your own tech business, 2025 presents exceptional opportunities in Africa's most developed economy. This comprehensive guide walks you through every step of starting a successful tech business in South Africa, from initial concept to sustainable growth.</p>
 
@@ -1379,6 +1384,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "13 min read",
     image: "/attached_assets/stock_images/digital_transformati_093c8edd.jpg",
     category: "Business",
+    tags: ["Digital Transformation", "SME", "Business Growth", "Technology Adoption", "Cloud Computing", "E-commerce"],
     content: `
       <p>Digital transformation is no longer optional for South African small and medium enterprises (SMEs). As customer expectations evolve, competition intensifies, and technology becomes more accessible, businesses that fail to digitize risk becoming obsolete. This comprehensive guide explains why digital transformation is essential for South African SMEs in 2025 and provides a practical roadmap for successful implementation.</p>
 

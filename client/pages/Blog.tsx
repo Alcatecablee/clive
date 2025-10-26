@@ -1,9 +1,48 @@
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight, Search, X, Tag } from "lucide-react";
 import { blogPosts } from "@/data/blog-posts";
 
 export default function Blog() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  const categories = useMemo(() => {
+    const uniqueCategories = Array.from(new Set(blogPosts.map((post) => post.category)));
+    return ["All", ...uniqueCategories.sort()];
+  }, []);
+
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    blogPosts.forEach((post) => {
+      post.tags.forEach((tag) => tagSet.add(tag));
+    });
+    return Array.from(tagSet).sort();
+  }, []);
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
+  };
+
+  const filteredPosts = useMemo(() => {
+    return blogPosts.filter((post) => {
+      const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
+      const matchesTags = selectedTags.length === 0 || selectedTags.some((tag) => post.tags.includes(tag));
+      const matchesSearch = 
+        searchQuery === "" ||
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+      
+      return matchesCategory && matchesTags && matchesSearch;
+    });
+  }, [searchQuery, selectedCategory, selectedTags]);
+
   return (
     <div className="flex flex-col">
       <Helmet>
@@ -35,8 +74,106 @@ export default function Blog() {
 
       <section className="py-20">
         <div className="mx-auto w-full max-w-6xl px-6">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {blogPosts.map((post) => (
+          <div className="mb-12 space-y-6">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Search articles by title, content, or category..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full rounded-xl border border-border bg-background py-4 pl-12 pr-12 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1 hover:bg-accent"
+                  aria-label="Clear search"
+                >
+                  <X className="h-5 w-5 text-muted-foreground" />
+                </button>
+              )}
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`rounded-full px-5 py-2.5 text-sm font-medium transition-all ${
+                    selectedCategory === category
+                      ? "bg-primary text-primary-foreground shadow-md"
+                      : "bg-accent text-foreground hover:bg-accent/70"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <Tag className="h-5 w-5 text-muted-foreground" />
+                <span className="text-sm font-medium text-foreground">Filter by Tags:</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {allTags.map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
+                      selectedTags.includes(tag)
+                        ? "bg-primary/20 text-primary border-2 border-primary"
+                        : "bg-muted text-muted-foreground border-2 border-transparent hover:border-muted-foreground/30"
+                    }`}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+              {selectedTags.length > 0 && (
+                <button
+                  onClick={() => setSelectedTags([])}
+                  className="text-sm text-primary hover:underline"
+                >
+                  Clear tag filters
+                </button>
+              )}
+            </div>
+
+            <div className="text-sm text-muted-foreground">
+              Showing {filteredPosts.length} {filteredPosts.length === 1 ? "article" : "articles"}
+              {selectedCategory !== "All" && ` in ${selectedCategory}`}
+              {selectedTags.length > 0 && ` with tag${selectedTags.length > 1 ? "s" : ""} "${selectedTags.join('", "')}"`}
+              {searchQuery && ` matching "${searchQuery}"`}
+            </div>
+          </div>
+
+          {filteredPosts.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-20 text-center">
+              <div className="mb-4 rounded-full bg-primary/10 p-6">
+                <Search className="h-12 w-12 text-primary" />
+              </div>
+              <h3 className="mb-2 font-display text-2xl font-semibold text-foreground">
+                No articles found
+              </h3>
+              <p className="mb-6 max-w-md text-muted-foreground">
+                Try adjusting your search or filter to find what you're looking for.
+              </p>
+              <button
+                onClick={() => {
+                  setSearchQuery("");
+                  setSelectedCategory("All");
+                  setSelectedTags([]);
+                }}
+                className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md transition-transform hover:-translate-y-0.5"
+              >
+                Clear all filters
+              </button>
+            </div>
+          ) : (
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredPosts.map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.id}`}
@@ -77,8 +214,9 @@ export default function Blog() {
                   </div>
                 </div>
               </Link>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </div>
